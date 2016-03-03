@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Grade Calculator</title>
+</head>
+<body>
+	<h1>Lets Figure out how you did!</h1>
+	<div id="results"></div>
+	<script>
+		var userIn=0;
+		while (userIn >= 101 || userIn <= 0){
+			userIn = prompt("How many points did you get? I will give your equavalent letter grade! Enter Number between 0 and 100.");
+			(userIn >=90 && userIn <= 100) ? document.write("You earned an A!") :
+			(userIn >=80 && userIn <= 89) ? document.write("You got a B!") : 
+			(userIn >=70 && userIn <= 79) ? document.write("You got a C!") :
+			(userIn >=60 && userIn <= 69) ? document.write("You got a D!") :
+			(userIn >=0 && userIn <= 59) ? document.write("You failed!") : document.write("Invalid Input.");
+		}
+	</script>
+</body>
+</html>
