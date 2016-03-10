@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>Pay Check</title>
+    <script>
+	/*
+		Christopher Schaefer
+		Assignment #2
+		March 9th, 2016
+	*/
+	</script>
+    </head>
+    
+    <body>
+    <script>
+			//Declare variables
+			var payRate=prompt("Calculate your Paycheck table \n Pay Rate $'s");
+			var nHours=85;//Total number of hours in table
+			var payChk; //Initialize the pay check = 0
+			var dblTim=20;//Double time starts
+			var trpTim=40;//Triple time starts
+			var hours=prompt("How many hours worked?");
+	</script>
+    <table width="200" border="1">
+        <tr>
+          <th>Hours</th>
+          <script>
+          	document.write("<th>Pay Check $"+payRate+"/hr</th>");
+		  </script>
+        </tr>
+        <script>
+			//Loop to fill the table
+				document.write("<tr>");
+				switch(true){
+					case (hours < dblTim):
+						payChk=hours*payRate;
+						break;
+					case (hours <= trpTim && hours >= dblTim):
+						payChk=dblTim*payRate+(hours-dblTim)*2*payRate;
+						break;
+					case (hours > trpTim):
+						payChk=dblTim*payRate+(trpTim-dblTim)*2*payRate+(hours-trpTim)*3*payRate;
+						break;
+				}
+				document.write("<td>"+hours+"</td>");
+				document.write("<td>$"+payChk.toFixed(2)+"</td>");
+				document.write("</tr>");
+		</script>
+	</table>
+    </body>
+</html>
