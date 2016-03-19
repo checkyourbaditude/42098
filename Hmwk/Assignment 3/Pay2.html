@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>Pay Check</title>
+    <script>
+	/*
+		Christopher Schaefer
+		Assignment #3
+		March 16th, 2016
+	*/
+	</script>
+    </head>
+    
+    <body>
+    <script>
+			//Declare variables
+			var payRate1=prompt("Calculate 1st employee's Paycheck table \n Pay Rate $'s");
+			var payRate2=prompt("Calculate 2nd employees Paycheck table \n Pay Rate $'s");
+			var nHours=85;//Total number of hours in table
+			var payChk; //Initialize the pay check = 0
+			var dblTim=20;//Double time starts
+			var trpTim=40;//Triple time starts
+			var hours=prompt("What is the least amount of hours worked your want to see in the table?"); //the starting point of the table
+			var upper=prompt("What is the most amount of hours worked your want to see in the table?"); //the upper echilon of the table's hours figure
+	</script>
+    <table width="200" border="1">
+        <tr>
+		
+          <th>Hours First Pay Period</th>
+          <script>
+		//setting up the table correctly.
+          	document.write("<th>Pay Check $"+payRate1+"/hr</th>");
+			document.write("<th>Pay Check $"+payRate2+"/hr</th>");
+		  </script>
+        </tr>
+        <script>
+		while(hours<=upper){
+		
+		//this is the first pay rate calculation
+				document.write("<tr>");
+				(hours < dblTim) ? (payChk=hours*payRate1) : 
+				(hours <= trpTim && hours >= dblTim) ? (payChk=dblTim*payRate1+(hours-dblTim)*2*payRate1) : (payChk=dblTim*payRate1+(trpTim-dblTim)*2*payRate1+(hours-trpTim)*3*payRate1);
+				document.write("<td>"+hours+"</td>");
+				document.write("<td>$"+payChk.toFixed(2)+"</td>");
+
+		//this is the second pay rate calculation
+				(hours < dblTim) ? (payChk=hours*payRate2) : 
+				(hours <= trpTim && hours >= dblTim) ? (payChk=dblTim*payRate2+(hours-dblTim)*2*payRate2) : (payChk=dblTim*payRate2+(trpTim-dblTim)*2*payRate2+(hours-trpTim)*3*payRate2);
+				document.write("<td>$"+payChk.toFixed(2)+"</td>");
+				document.write("</tr>");
+				hours++;
+		}
+		</script>
+	</table>
+    </body>
+</html>
