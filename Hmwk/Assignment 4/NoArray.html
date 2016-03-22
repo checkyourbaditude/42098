@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>Pay Check</title>
+    <script>
+	/*
+		Christopher Schaefer
+		Assignment #3
+		March 16th, 2016
+	*/
+	</script>
+    </head>
+    
+    <body>
+    <script>
+			//Declare variables
+			var payRate1=10;
+			var nHours=85;//Total number of hours in table
+			var payChk=0; //Initialize the pay check = 0
+			var dblTim=20;//Double time starts
+			var trpTim=40;//Triple time starts
+			var hours=0;
+			var upper=72;
+			var taxRate=0.10;//Rate of taxes on the paycheck
+			var taxes=0;
+			var netPay=0;
+	</script>
+    <table width="200" border="1">
+        <tr>
+		
+          <th>Hours</th>
+          <script>
+		//setting up the table correctly.
+          	document.write("<th>Pay Check $</th>");
+			document.write("<th>Pay Rate $</th>");
+			document.write("<th>Taxes Collected (@ 10%)</th>");
+			document.write("<th>Pay Check after taxes $</th>");
+		  </script>
+        </tr>
+        <script>
+		while(hours<=upper){
+		//this is the first pay rate calculation
+				document.write("<tr>");
+				if(hours < dblTim){
+					payChk=hours*payRate1;
+				}else if(hours <= trpTim && hours >= dblTim){
+					payChk=dblTim*payRate1+(hours-dblTim)*2*payRate1;
+				}else{
+					payChk=dblTim*payRate1+(trpTim-dblTim)*2*payRate1+(hours-trpTim)*3*payRate1;
+				};
+				//(hours < dblTim) ? (payChk=hours*payRate1) : 
+				//(hours <= trpTim && hours >= dblTim) ? (payChk=dblTim*payRate1+(hours-dblTim)*2*payRate1) : //(payChk=dblTim*payRate1+(trpTim-dblTim)*2*payRate1+(hours-trpTim)*3*payRate1);
+				
+				netPay=payChk-(payChk*taxRate);
+				taxes=payChk-(payChk*taxRate);
+				
+				document.write("<td>"+hours+"</td>");
+				document.write("<td>$"+payChk.toFixed(2)+"</td>");
+				
+				//see what the pay rate is!
+				if(hours<dblTim){
+					document.write("<td>$"+payRate1+"</td>");
+				}else if (hours <= trpTim && hours >= dblTim){
+					document.write("<td>$"+dblTim+"</td>");
+				}else{
+					document.write("<td>$"+trpTim+"</td>");
+				};
+				
+				document.write("<td>"+taxes+"</td>");
+				document.write("<td>$"+netPay.toFixed(2)+"</td>");
+		//this is the second pay rate calculation
+				
+				
+				document.write("</tr>");
+				hours++;
+		}
+		</script>
+	</table>
+    </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="generator" content="CSE HTML Validator (https://www.htmlvalidator.com/)">
+</head>
+
+<body>
+	<script>
+		//Declare Variables
+		var hrLimit=72;//Hours per week limit
+		var payRate=10;//Pay rate in $'s/hr
+		var dblTim=20;//Double time starts
+		var trpTim=40;//Triple time starts
+		var taxRate=0.10;//Rate of taxes on the paycheck
+		var payChk=[];//Pay check array
+		var hours=[];//Declare the hours array
+		var rate=[];//Declare the pay rate array array
+		var taxes=[]//Declare Taxes array
+		var netPay=[];//Pay after taxes
+		
+		//Output the inputs
+		var str=   "<h1>Pay Rate = $"+payRate+" $'s/hr</h1>";
+		str+=   "<h1>Overtime starts at "+dblTim+" hrs</h1>";
+		str+=   "<h1>Triple Time starts at "+trpTim+" hrs</h1>";
+		document.write(str);
+		
+		//Calculate the Pay Check information first
+		for(var hrsWrkd=0,row=0;hrsWrkd<=hrLimit;hrsWrkd++,row++){
+			//Calculate the paycheck
+			//Insert Array values
+			if(hrsWrkd<=dblTim){
+			        payChk[row]=hrsWrkd*payRate;
+					rate[row]=payRate;					
+			}else if(hrsWrkd<trpTim){
+					payChk[row]=dblTim*payRate+(hrsWrkd-dblTim)*2*payRate;
+					rate[row]=dblTim;
+			}else{
+					payChk[row]=dblTim*payRate+(trpTim-dblTim)*2*payRate+(hrsWrkd-trpTim)*3*payRate;
+					rate[row]=trpTim;
+			};
+			taxes[row]=payChk[row]*taxRate;
+			netPay[row]=payChk[row]-taxes[row];
+			hours[row]=hrsWrkd;
+			
+		}
+		
+		//Table Heading
+		str='<table border="1" style="width:auto">';
+		str+="<tr><th>Hours</th><th>Pay Check $</th><th>Pay Rate $</th><th>Taxes Collected (@ 10%)</th><th>Net Pay</th></tr>";
+		//Loop over all the hours that could be worked
+		for(var row=0;row<hours.length;row++){
+        //Add the hours worked and the paycheck to the table string
+			str+="<tr>";
+			str+="<td><center>"+hours[row].toFixed(2)+"</center></td>";
+			str+="<td><center>"+payChk[row].toFixed(2)+"</center></td>";
+			str+="<td><center>"+rate[row].toFixed(2)+"</center></td>";
+			str+="<td><center>"+taxes[row].toFixed(2)+"</center></td>";
+			str+="<td><center>"+netPay[row].toFixed(2)+"</center></td>";
+				str+="</tr>";
+		}
+		str+="</table>";
+		//Display the string
+		document.write(str);
+	</script>
+</body>
+</html>
