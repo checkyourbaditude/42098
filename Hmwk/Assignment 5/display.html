@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title></title>
+	<script type="text/javascript" src="./savings.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+    //Take the URL in the Window
+    var url=window.location.href;
+    //Split the URL and the important information is in the 2nd half
+    var info=url.split("?");
+    //Place name value pairs into an array
+    var nameValuePairs=info[1].split("&");
+	
+	var rtax=0.1;
+	var hours=0;
+	//more variables, these are for the 2d array
+	var NROWS=73,NCOLS=5;
+	var twoD=[];
+    object=new Object();
+    for(var i=0;i<nameValuePairs.length;i++){
+         var map=nameValuePairs[i].toString().split("=");
+         var name =map[0];
+         var value=map[1];
+         object[name]=value;
+	};
+	for(var rows=0;rows<NROWS;rows++){
+		twoD[rows]=[];
+	}
+	//Fill the array
+	for(var rows=0;rows<NROWS;rows++,hours++){
+		for(var cols=0;cols<NCOLS;cols++){
+			switch(cols){
+				case 0:
+				//first column, only hours
+					twoD[rows][cols]=hours;
+					break;
+				//second column, only the hourly rate
+				case 1:
+					if(hours<=20){
+						twoD[rows][cols]=object[name];
+					}else if(hours>20 && hours<=40){
+						twoD[rows][cols]=2*object[name];
+					}else{
+						twoD[rows][cols]=3*object[name];
+					};
+					break;
+				//third column, only the gross pay
+				case 2:
+					if(hours<=20){
+						twoD[rows][cols]=hours*object[name];
+					}else if(hours>20 && hours<=40){
+						twoD[rows][cols]=hours*2*object[name];
+					}else{
+						twoD[rows][cols]=hours*3*object[name];
+					};
+					break;
+				//fourth column, only taxes collected
+				case 3:
+					if(hours<=20){
+						twoD[rows][cols]=(hours*object[name])*rtax;
+					}else if(hours>20 && hours<=40){
+						twoD[rows][cols]=(hours*2*object[name])*rtax;
+					}else{
+						twoD[rows][cols]=(hours*3*object[name])*rtax;
+					};
+					break;
+				//fifth column, only gross pay
+				case 4:
+					if(hours<=20){
+						twoD[rows][cols]=(hours*object[name])-(hours*object[name]*rtax);
+					}else if(hours>20 && hours<=40){
+						twoD[rows][cols]=(hours*2*object[name])-(hours*2*object[name]*rtax);
+					}else{
+						twoD[rows][cols]=(hours*3*object[name])-(hours*3*object[name]*rtax);
+					};
+					break;
+			}
+		
+		}
+	}
+	//Output the inputs
+	var str="";
+	str+=   "<h1>Pay Rate = $"+object[name]+" $'s/hr</h1>";
+	str+=   "<h1>Overtime starts at 20 hrs</h1>";
+	str+=   "<h1>Triple Time starts at 40 hrs</h1>";
+	str+=   "<h1>Taxes are 10%</h1>";
+	
+	//Display the table
+	str+='<table border="1" style="width:auto">';
+	str+="<tr><th>Hours</th><th>Pay Rate $</th><th>Gross Pay</th><th>Taxes Collected (@ 10%)</th><th>Net Pay</th></tr>";
+	
+	for(var rows=0;rows<NROWS;rows++){
+		str+="<tr>";
+		for(var cols=0;cols<NCOLS;cols++){
+			str+=("<td><center>"+twoD[rows][cols]+"</center></td>");
+		}
+		str+="</tr>";
+	}
+	str+="</table>";
+	document.write(str);
+	</script>
+</body>
+</html>
