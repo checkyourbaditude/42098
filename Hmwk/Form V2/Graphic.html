@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- 	
+			Christopher Schaefer
+			Page to Display the image
+		-->
+		<title>Graphic</title>
+		<script src="functions.js"></script>
+		<link rel="stylesheet" type="text/css" href="styles.css" />
+	</head>
+	<body>
+		<script>
+			var url=getFormUrl();
+			var nV=getFormInfo(url);
+			var strOb=stringifyObject(nV);
+			var parOb=parseToObject(strOb);
+			
+			//figure out if the counter object exists in session storage
+			if(sessionStorage.getItem("rCount") === null){
+				//create an object to store correct values and display them
+				var counter={
+					Q1: 0,
+					Q2: 0,
+					nSurvey: 0,
+				};
+				switch(parOb.Question1){
+					case "correct":{
+						counter.Q1++;
+						break;
+					}
+				}
+				switch(parOb.Question2){
+					case "correct":{
+						counter.Q2++;
+						break;
+					}
+				}
+				//add this to another part of code
+				counter.nSurvey++;
+				counter=stringifyObject(counter);
+				sessionStorage.setItem("rCount", counter);
+			}
+			else{
+				document.write("<p>There is a results object!</p>");
+				var counter=sessionStorage.getItem("rCount");
+				counter=JSON.parse(counter);
+				//output the object
+				//check for the first question's correct or incorrect value
+				if(parOb.Question1=="correct"){
+					counter["Q1"]++;
+				}
+				if(parOb.Question2=="correct"){
+					counter["Q2"]++;
+				}
+				counter["nSurvey"]++;
+				counter=stringifyObject(counter);
+				sessionStorage.setItem("rCount", counter);
+			}
+			sessionStorage.setItem("userAns", strOb);
+		</script>
+		<h2>Did You Know?</h2>
+		<a href="results.html"><img src="FedBudgetPi.png" /></a>
+	</body>
+</html>

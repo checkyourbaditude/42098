@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- 	
+			Christopher Schaefer
+			Form V1 Homework
+		-->
+		<title>Results</title>
+		<script src="functions.js"></script>
+		<link rel="stylesheet" type="text/css" href="styles.css" />
+	</head>
+	<body>
+		<h2>Lets see how you did!</h2>
+		<script>
+			//call the session storage objects created on previous page
+			var counter=sessionStorage.getItem("rCount");
+			var userOb=sessionStorage.getItem("userAns");
+			//create and set variables to hold percentages of correct and incorrect for session
+			var p1=0;
+			var p2=0;
+			
+			counter=JSON.parse(counter);
+			userOb=JSON.parse(userOb);
+
+			//calculations and conversion
+			if(counter["Q1"]){
+				p1=0;
+			}
+			else{
+				p1=(counter["Q1"]/counter["nSurvey"])*100;
+			}
+			if(counter["Q2"]===null){
+				p2=0;
+			}
+			else{
+				p2=(counter["Q2"]/counter["nSurvey"])*100;
+			}
+			
+			//outputs based on results taken from script on previous page
+			if(userOb["Question1"]=="correct"){
+				document.write("<p>You got question 1 correct!</p>");
+				document.write("<p>The percentage of people that got question 1 correct is: "+p1+"%</p>");
+			}
+			else{
+				document.write("<p>You don't know the Federal Budget as well as you thought! The Military Budget is not THAT large.</p>");
+				document.write("<p>The percentage of people that got this question 1 correct is: "+p1+"%</p>");
+			}
+			if(userOb["Question2"]=="correct"){
+				document.write("<p>You got question 2 correct!</p>");
+				document.write("<p>The percentage of people that got question 1 correct is: "+p2+"%</p>");
+			}
+			else{
+				document.write("<p>You don't know the Federal Budget as well as you thought! Welfare programs are the largest percentage of the Government Budget in 2016.</p>");
+				document.write("<p>The percentage of people that got question 1 correct is: "+p2+"%</p>");
+			}
+		</script>
+		<form action="Form.html" method="get">
+			<input name="submit" type="submit" />
+		</form>
+	</body>
+</html>
