@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!--
+	Christopher Schaefer
+	Form v3
+-->
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<title>Test Your Knowledge!</title>
+	<script src="functions.js"></script>
+</head>
+
+<body>
+	<script>
+
+		//pull down the username and password from teh URL
+		var url=getFormUrl();
+		var nV=getFormInfo(url);
+		var strOb=stringifyObject(nV);
+
+		document.write(strOb);
+
+		//check to see if the session storage object exists
+		if(sessionStorage.getItem("userStore" === null)){
+			document.write("<p>There is not a user storage object, we must create one!</p>");
+			sessionStorage.setItem("userStore",strOb);
+
+		}
+		else {
+			document.write("<p>There is a user storage object! Lets append it!</p>");
+			appendToSessionStorage("userStore",strOb);
+		}
+	</script>
+	<table>
+		<form action="results.html" method="get">
+			<tr>
+				<p class="AskQuestion">1) What percent of the US Federal Budget is allocatedd to the Military?</p>
+				<input name="Question1" type="radio" value="incorrect"/>42%</br>
+				<input name="Question1" type="radio" value="correct" />18%</br>
+			</tr>
+			<tr>
+				<p class="AskQuestion">2) What percent of the US Federal Budget is allocatedd to the Entitlements?</p>
+				<input name="Question2" type="radio" value="incorrect"/>25%</br>
+				<input name="Question2" type="radio" value="correct" />60%</br>
+			</tr>
+			<tr>
+				<input name="Submit" type="submit" />
+			</tr>
+		</form>
+	</table>
+</body>
+</html>
