@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="YahtzeeStyles.css">
+<script type="text/javascript" src="YahtzeeFunctions.js"></script>
+</head>
+<body>
+	<script>
+		//variable to hold the number of rolls user has used
+		var rollCnt=0;
+		var turnNum=12;
+		var plyrHand= new Array(5);
+
+		//make scorecard objects
+		//upper section
+		var ACES=new scoreObj("Aces", false, 0);
+		var TWOS=new scoreObj("Twos", false, 0);
+		var THREES=new scoreObj("Threes", false, 0);
+		var FOURS=new scoreObj("Fours", false, 0);
+		var FIVES=new scoreObj("Fives", false, 0);
+		var SIXES=new scoreObj("Sixes", false, 0);
+
+		//lower section
+		var KIND3=new scoreObj("Kind3", false, 0);
+		var KIND4=new scoreObj("Kind4", false, 0);
+		var FHOUSE=new scoreObj("Fhouse", false, 0);
+		var SS=new scoreObj("SS", false, 0);
+		var LS=new scoreObj("LS", false, 0);
+		var YAHTZEE=new scoreObj("Yahtzee", false, 0);
+		var CHANCE=new scoreObj("Chance", false, 0);
+
+		// Object to hold totals
+		var TOTALS = {
+			upper:0,
+			lower:0,
+			overall:0,
+		}
+
+		//an array of objects to hold scores
+		var SCORE_CARD={
+			ACES,
+			TWOS,
+			THREES,
+			FOURS,
+			FIVES,
+			SIXES,
+			KIND3,
+			KIND4,
+			FHOUSE,
+			SS,
+			LS,
+			YAHTZEE,
+			CHANCE,
+			TOTALS,
+		}
+	</script>
+	<div id="Heading"><img src="Yahtzeeimg.png" alt="Yahtzee"/><h1>by Christopher Schaefer!</h1></div>
+	<div id="mechRoll">
+		<h2 id="turnCounter">Turn #: </h2>
+		<h3 id="rollCounter">Roll #: </h3>
+		<div id="dieLabels">
+			<form>
+				<div id="die1" class="dice"></div><br />
+				<input id="d1" type="checkbox" name="rr1" value="">
+				<p>Die #1</p>
+				<div id="die2" class="dice"></div><br />
+				<input id="d2" type="checkbox" name="rr1" value="">
+				<p>Die #2</p>
+				<div id="die3" class="dice"></div><br />
+				<input id="d3" type="checkbox" name="rr1" value="">
+				<p>Die #3</p>
+				<div id="die4" class="dice"></div><br />
+				<input id="d4" type="checkbox" name="rr1" value="">
+				<p>Die #4</p>
+				<div id="die5" class="dice"></div><br />
+				<input id="d5" type="checkbox" name="rr1" value="">
+				<p>Die #5</p>
+			</form>	
+		</div>
+		<div id="rollMechButtons">
+			<button id="rollButton" onclick="rollDice()">Roll Dice</button><br />
+			<button id="goToGrading" onclick="choiceView()">Keep All</button>
+		</div>
+	</div>
+	<div id="grading">
+		<form id="gradingForm"></form>
+		<div id='resetToggle'></div>
+	</div>
+</body>
+</html>
