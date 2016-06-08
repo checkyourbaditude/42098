@@ -93,3 +93,10 @@ div.dice{
 .Used {
 	color: grey;
 }
+.title {
+	text-align: left;
+}
+.total {
+	font-weight: bold;
+	text-align: left;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+    Dr. Mark E. Lehr
+    April 6th, 2016
+    Local Storage
+-->
+<html>
+    <head>
+        <title>OUR MARKET</title>
+        <style>
+            h1 {
+                color:red;
+            }
+            table {
+                width:auto;
+                border:1px solid black;
+            }
+            th {
+                width: 100px;
+            }
+            td {
+                text-align: center;
+                width: 100px;
+                text-align: center;
+            }
+            tr:nth-child(even) {
+                background:red;
+            }
+            #showInventory {
+                padding: 10px;
+            }
+            #itemCnt {
+                border: 1px solid black;
+                position:absolute;
+                top:0;
+                right:0;
+            }
+            #buttons {
+                padding: 10px;
+            }
+            .Description {
+                width: 200px;
+                text-align: left;
+                height:auto;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="Functions.js"></script>
+    </head>
+    <script>
+        var inventoryCnt=0;
+    </script>
+    <body onload="inventoryView()">
+        <h1>Welcome to our Store!</h1>
+        <h2>OUR INVENTORY</h2>
+        <div id="itemCnt">Your cart has: </div>
+        <div id="showInventory">
+            <form id="inventoryForm">
+            </form>
+        </div>
+        <div id="buttons">
+            <button type='button' id='add2Cart' onclick='addToCart()'>Add</button>
+            <button type='button' id='cartView' onclick='setStorage()'>Go to Cart</button></form>
+        </div>
+    </body>
+</html>

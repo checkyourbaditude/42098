@@ -359,9 +359,10 @@ function finishGameView(){
 	console.log("Entered finishGameView()");
 
 	var finishStr=" ";
+	var cookieStr;
 
 	//get the totals from the game and store in TOTALS object
-	TOTALS.upper=(SCORE_CARD["ACES"].score+SCORE_CARD["TWOS"].score+SCORE_CARD["THREES"].score+SCORE_CARD["THREES"].score+SCORE_CARD["FOURS"].score+SCORE_CARD["FIVES"].score+SCORE_CARD["SIXES"].score);
+	TOTALS.upper=(SCORE_CARD["ACES"].score+SCORE_CARD["TWOS"].score+SCORE_CARD["THREES"].score+SCORE_CARD["FOURS"].score+SCORE_CARD["FIVES"].score+SCORE_CARD["SIXES"].score);
 	TOTALS.lower=(SCORE_CARD["KIND3"].score+SCORE_CARD["KIND4"].score+SCORE_CARD["FHOUSE"].score+SCORE_CARD["SS"].score+SCORE_CARD["LS"].score+SCORE_CARD["YAHTZEE"].score+SCORE_CARD["CHANCE"].score);
 	TOTALS.overall=(TOTALS.upper+TOTALS.lower);
 
@@ -374,9 +375,32 @@ function finishGameView(){
 	console.log("The Lower Total "+TOTALS.upper);
 	console.log("The Overall Total "+TOTALS.overall);
 
+	//set the session storage
+	//cookieStr=stringifyObject(SCORE_CARD["ACES"])+stringifyObject(SCORE_CARD["TWOS"])+stringifyObject(SCORE_CARD["THREES"])+stringifyObject(SCORE_CARD["FOURS"])+stringifyObject(SCORE_CARD["FIVES"])+stringifyObject(SCORE_CARD["SIXES"])+stringifyObject(SCORE_CARD["KIND3"])+stringifyObject(SCORE_CARD["KIND4"])+stringifyObject(SCORE_CARD["FHOUSE"])+stringifyObject(SCORE_CARD["SS"])+stringifyObject(SCORE_CARD["LS"])+stringifyObject(SCORE_CARD["YAHTZEE"])+stringifyObject(SCORE_CARD["CHANCE"])+stringifyObject(SCORE_CARD["TOTALS"]);
+	//sessionStorage.setItem("score",cookieStr);
+
 	//set up new view
-	finishStr+="<p>Congratulations<br />You Finished the Game<p>";
-	finishStr+="<form action='YahtzeeFinished.html'><button type='submit' id='resetButton'>See Score</button></form>";
+	finishStr+="<table>";
+	finishStr+="<tr><th>Congratulations<br />You Finished the Game</th></tr>";
+	//finishStr+="<form action='YahtzeeFinished.html'><button type='submit' id='resetButton'>See Score</button></form>";
+	finishStr+="<tr><td class='title'>1)Aces</td><td>"+SCORE_CARD["ACES"].score+"</td></tr>";
+	finishStr+="<tr><td class='title'>2)Twos</td><td>"+SCORE_CARD["TWOS"].score+"</td></tr>";
+	finishStr+="<tr><td class='title'>3)Threes</td><td>"+SCORE_CARD["THREES"].score+"</td></tr>";
+	finishStr+="<tr><td class='title'>4)Fours</td><td>"+SCORE_CARD["FOURS"].score+"</td></tr>";
+	finishStr+="<tr><td class='title'>5)Fives</td><td>"+SCORE_CARD["FIVES"].score+"</td></tr>";
+	finishStr+="<tr><td class='title'>6)Sixes</td><td>"+SCORE_CARD["SIXES"].score+"</td></tr>";
+	finishStr+="<tr><td class='total'>Upper Total (Plus 36 if bonus achieved):</td><td>"+TOTALS.upper+"</td></tr>";
+
+	finishStr+="<tr><td class='title'>7)3 of a Kind</td><td>"+SCORE_CARD["KIND3"].score+"</td></tr>";
+	finishStr+="<tr><td class='title'>8)4 of a Kind</td><td>"+SCORE_CARD["KIND4"].score+"</td></tr>";
+	finishStr+="<tr><td class='title'>9)Full House</td><td>"+SCORE_CARD["FHOUSE"].score+"</td></tr>";
+	finishStr+="<tr><td class='title'>10)Small Straight</td><td>"+SCORE_CARD["SS"].score+"</td></tr>";
+	finishStr+="<tr><td class='title'>11)Large Straight</td><td>"+SCORE_CARD["LS"].score+"</td></tr>";
+	finishStr+="<tr><td class='title'>12)Yahtzee</td><td>"+SCORE_CARD["YAHTZEE"].score+"</td></tr>";
+	finishStr+="<tr><td class='title'>13)Chance</td><td>"+SCORE_CARD["CHANCE"].score+"</td></tr>";
+	finishStr+="<tr><td class='total'>Lower Total:</td><td>"+TOTALS.lower+"</td></tr>";
+	finishStr+="<tr><td class='total'>Total Score:</td><td>"+TOTALS.overall+"</td></tr>";
+	finishStr+="</table>";
 
 	//output the view
 	document.getElementById("mechRoll").innerHTML=finishStr;
@@ -723,4 +747,9 @@ function isY(Arry){
     else {
     	return false;
     }
+}
+
+function stringifyObject(obj){
+	var str=JSON.stringify(obj);
+	return str;
 }
