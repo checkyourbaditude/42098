@@ -7,11 +7,57 @@
 <html>
     <head>
         <title>Cart</title>
+        <style>
+            h1 {
+                color:red;
+            }
+            table {
+                width:auto;
+                border:1px solid black;
+            }
+            th {
+                width: 100px;
+            }
+            td {
+                text-align: center;
+                width: 100px;
+                text-align: center;
+            }
+            tr:nth-child(even) {
+                background:red;
+            }
+            #showInventory {
+                padding: 10px;
+            }
+            #itemCnt {
+                border: 1px solid black;
+                position:absolute;
+                top:0;
+                right:0;
+            }
+            #buttons {
+                padding: 10px;
+            }
+            .Description {
+                width: 200px;
+                text-align: left;
+                height:auto;
+            }
+        </style>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" src="Functions.js"></script>
     </head>
-    <body onload="inventoryView()">
+    <body onload="createCartView()">
+    <script type="text/javascript">
+    </script>
         <h1>Your Shopping Cart!</h1>
+        <div id="showCart">
+            <form id="cartForm">
+        </div>
+        <div id="buttons">
+            <button type='button' id='add2Cart' onclick='removeFromCart()'>Remove</button>
+            <button type='button' id='cartView' onclick='gotoMarket()'>Back</button></form>
+        </div>
     </body>
 </html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- 	
+			Christopher Schaefer
+			Form V1 Homework
+		-->
+		<title>Results</title>
+		<script src="functions.js"></script>
+		<link rel="stylesheet" type="text/css" href="styles.css" />
+	</head>
+	<body>
+		<h2>Lets see how you did!</h2>
+		<script>
+			var url=getFormUrl();
+			var nV=getFormInfo(url);
+			var userOb=stringifyObject(nV);
+			var parOb=parseToObject(userOb);
+
+			//pull the stored user information from session storage
+			var userStore=sessionStorage.getItem("userStore");
+			userStore=JSON.parse(userStore);
+
+			document.write("<p>Credentials:</p><p>"+userStore["userName"]+"</p><p>"+userStore["password"]+"</p>");
+
+			//variables to hold the percentages correct for each question
+			var p1=0;
+			var p2=0;
+			
+			//figure out if the counter object exists in session storage
+			if(sessionStorage.getItem("rCount") === null){
+				//create an object to store correct values and display them
+				document.write("This is working!");
+				counter={
+					Q1: 0,
+					Q2: 0,
+					nSurvey: 0,
+				};
+				switch(parOb.Question1){
+					case "correct":{
+						counter.Q1++;
+						break;
+					}
+				}
+				switch(parOb.Question2){
+					case "correct":{
+						counter.Q2++;
+						break;
+					}
+				}
+				//add this to another part of code
+				counter.nSurvey++;
+
+				if(counter.Q1===null){
+					p1=0;
+				}
+				else{
+					p1=(counter.Q1/counter.nSurvey)*100;
+				}
+				if(counter.Q2===null){
+					p2=0;
+				}
+				else{
+					p2=(counter.Q2/counter.nSurvey)*100;
+				}
+				counter=stringifyObject(counter);
+				sessionStorage.setItem("rCount", counter);
+			}
+			else{
+				document.write("<p>There is a results object!</p>");
+				var counter=sessionStorage.getItem("rCount");
+				counter=JSON.parse(counter);
+				//output the object
+				//check for the first question's correct or incorrect value
+				if(parOb.Question1=="correct"){
+					counter["Q1"]++;
+				}
+				if(parOb.Question2=="correct"){
+					counter["Q2"]++;
+				}
+				counter["nSurvey"]++;
+
+				if(counter["Q1"]===null){
+				p1=0;
+				}
+				else{
+					p1=(counter["Q1"]/counter["nSurvey"])*100;
+				}
+				if(counter["Q2"]===null){
+					p2=0;
+				}
+				else{
+					p2=(counter["Q2"]/counter["nSurvey"])*100;
+				}
+				counter=stringifyObject(counter);
+				sessionStorage.setItem("rCount", counter);
+			}
+
+
+
+			//outputs based on results taken from script on previous page
+			if(parOb["Question1"]=="correct"){
+				document.write("<p>You got question 1 correct!</p>");
+				document.write("<p>The percentage of people that got question 1 correct is: "+p1+"%</p>");
+			}
+			else{
+				document.write("<p>You don't know the Federal Budget as well as you thought! The Military Budget is not THAT large.</p>");
+				document.write("<p>The percentage of people that got this question 1 correct is: "+p1+"%</p>");
+			}
+			if(parOb["Question2"]=="correct"){
+				document.write("<p>You got question 2 correct!</p>");
+				document.write("<p>The percentage of people that got question 1 correct is: "+p2+"%</p>");
+			}
+			else{
+				document.write("<p>You don't know the Federal Budget as well as you thought! Welfare programs are the largest percentage of the Government Budget in 2016.</p>");
+				document.write("<p>The percentage of people that got question 1 correct is: "+p2+"%</p>");
+			}
+		</script>
+		<form action="getLogin.html" method="get">
+			<input name="submit" type="submit" />
+		</form>
+	</body>
+</html>

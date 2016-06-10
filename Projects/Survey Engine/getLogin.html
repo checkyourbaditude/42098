@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!--
+	Christopher Schaefer
+	Form v3
+-->
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<title>Login</title>
+	<script>
+		//regular expressions
+		var regExpPatternUser= /^[A-Za-z]{2}\d{7}$/;
+		var regExpPatternPassword= /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20}/;
+
+		//form Validation Functions
+		function validateForm(myLogin){
+
+			//local variables
+			var checkUser=myLogin.userName.value;
+			var checkPassword=myLogin.password.value;
+			var errorsUser=[];
+			var errorsPassword=[];
+
+			//check the username
+			if(!regExpPatternUser.test(checkUser)){
+				errorsUser[errorsUser.length]="Please, enter valid data!";
+				var tagUser=document.getElementById("userName");
+				tagUser.style.backgroundColor='#FF8C69';
+			}
+			else{
+				var tagUser=document.getElementById("userName");
+				tagUser.style.backgroundColor='#00FF00';
+			}
+			//check the password
+			if(!regExpPatternPassword.test(checkPassword)){
+				errorsPassword[errorsPassword.length]="Please, enter valid data!";
+				var tagPassword=document.getElementById("password");
+				tagPassword.style.backgroundColor='#FF8C69';
+			}
+			else{
+				var tagUser=document.getElementById("password");
+				tagPassword.style.backgroundColor='#00FF00';
+			}
+			if(errorsPassword.length>0){
+				reportErrors(errorsUser);
+				return false;
+			}
+			if(errorsPassword.length>0){
+				reportErrors(errorsPassword);
+				return false;
+			}
+			return true;
+		}
+
+		//alerts user of errors
+		function reportErrors(errors){
+			var msg="Invalid input...\n";
+			for(var i=0;i<errors.length;i++){
+				var numError=i+1;
+				msg+="\n"+numError+". "+errors[i];
+			}
+			alert(msg);
+		}
+		</script>
+</head>
+
+<body>
+	<h1>
+		Welcome to my Survey!
+	</h1>
+	<table>
+		<tr>
+			<th>
+				Your username needs to be your student ID: the format should be two letters followed by a series of 7 numbers. Your password must contain a digit from 1-9, one lower case letter, one upper case letter, one special symbol (@#$%), and must be 6-20 characters in length.
+			</th>
+		</tr>
+		<tr>
+			<td>
+				<form name="myLogin" action="Form.html" onsubmit="return validateForm(this)" method="GET" id="myLogin">
+					Username:
+					<input type="text" name="userName" id="userName"><br>
+					Password:
+		  			<input type="password" name="password" id="password"><br>
+		  			<input type="Submit"><input type="reset">
+				</form>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

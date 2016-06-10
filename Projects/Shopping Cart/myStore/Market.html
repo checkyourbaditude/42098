@@ -49,7 +49,10 @@
         <script type="text/javascript" src="Functions.js"></script>
     </head>
     <script>
+
         var inventoryCnt=0;
+        var cart= new Array();
+
     </script>
     <body onload="inventoryView()">
         <h1>Welcome to our Store!</h1>
@@ -57,11 +60,10 @@
         <div id="itemCnt">Your cart has: </div>
         <div id="showInventory">
             <form id="inventoryForm">
-            </form>
         </div>
         <div id="buttons">
-            <button type='button' id='add2Cart' onclick='addToCart()'>Add</button>
-            <button type='button' id='cartView' onclick='setStorage()'>Go to Cart</button></form>
+            <button type='button' id='add2Cart' onclick='addToCart(cart)'>Add</button>
+            <button type='button' id='cartView' onclick='setStorage(cart)'>Go to Cart</button></form>
         </div>
     </body>
 </html>
